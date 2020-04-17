@@ -66,81 +66,12 @@ exports.send = (currentComment, parentComment) => {
     let SITE_URL = process.env.SITE_URL;
 
     let _subject = process.env.MAIL_SUBJECT || '${PARENT_NICK}，您在『${SITE_NAME}』上的评论收到了回复';
-    let _template = process.env.MAIL_TEMPLATE || '<div style="background: white;
-    width: 100 %;
-    max - width: 800px;
-    margin: auto auto;
-    border - radius: 5px;
-    border:#1bc3fb 1px solid;
-    overflow: hidden;
-    -webkit - box - shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.12);
-    box - shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.18); ">
-        < header style = "overflow: hidden;" >
-            <center>
-                <img style="width:100%;HEz-index: 666;"
-                    src="https://cdn.jsdelivr.net/gh/HimitZH/CDN/images/HCODE.png">
-      </center>
-  </header>
-            <div style="padding: 5px 20px;">
-                <p style="position: relative;
-      color: white;
-      float: left;
-      z-index: 999;
-      background: #1bc3fb;
-      padding: 5px 30px;
-      margin: -25px auto 0 ;
-      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.30)">
-                    Dear ${PARENT_NICK}
-                </p>
-                <br>
-                    <center>
-                        <h3>
-                            来自 <span style="text-decoration: none;color: #FF779A; ">${NICK}</span> 的回复
-          </h3>
-                    </center>
-                    <br>
-                        &nbsp; &nbsp;
-      <p>
-                            您在 <a style="text-decoration: none;color: #1bc3fb " target="_blank" href="${POST_URL}"
-                                rel="noopener">&nbsp;${SITE_NAME}</a>
-          上曾发表的评论：
-      </p>
-                        <div
-                            style="background: #fafafa repeating-linear-gradient(-45deg,#fff,#fff 1.125rem,transparent 1.125rem,transparent 2.25rem);box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);margin:20px 0px;padding:15px;border-radius:5px;font-size:14px;color:#555555;">
-                            ${PARENT_COMMENT}</div>
-      &nbsp; &nbsp;
-      <p>
-                            收到了来自 <span style="color: #FF779A;">${NICK}</span> 的回复：
-      </p>
-                        <div
-                            style="background: #fafafa repeating-linear-gradient(-45deg,#fff,#fff 1.125rem,transparent 1.125rem,transparent 2.25rem);box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);margin:20px 0px;padding:15px;border-radius:5px;font-size:14px;color:#555555;">
-                            ${COMMENT}</div>
-                        <br>
-                            <div style="text-align: center;">
-                                <a style="text-transform: uppercase;
-                    text-decoration: none;
-                    font-size: 14px;
-                    background: #FF779A;
-                    color: #FFFFFF;
-                    padding: 10px;
-                    display: inline-block;
-                    border-radius: 5px;
-                    margin: 10px auto 0; " target="_blank" href="${POST_URL}" rel="noopener">Hcode｜传送门🚪</a>
-                            </div>
-                            <p style="font-size: 12px;text-align: center;color: #999;">
-                                欢迎常来访问！<br>
-                                    © 2020 <a style="text-decoration:none; color:#1bc3fb" href="${SITE_URL}" rel="noopener"
-                                        target="_blank">
-                                        ${SITE_NAME} </a>
-      </p>
-                                <p></p>
-  </div>
-</div>';
+    let _template = process.env.MAIL_TEMPLATE || Template.load('./index.html');;
     let emailSubject = eval('`' + _subject + '`');
     let emailContent = eval('`' + _template + '`');
 
     let mailOptions = {
-                            from: '"' + process.env.SENDER_NAME + '" <' + process.env.SENDER_EMAIL + '>', // sender address
+        from: '"' + process.env.SENDER_NAME + '" <' + process.env.SENDER_EMAIL + '>', // sender address
         to: parentComment.get('mail'),
         subject: emailSubject,
         html: emailContent
