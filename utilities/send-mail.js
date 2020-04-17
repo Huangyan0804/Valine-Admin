@@ -66,7 +66,7 @@ exports.send = (currentComment, parentComment) => {
     let SITE_URL = process.env.SITE_URL;
 
     let _subject = process.env.MAIL_SUBJECT || '${PARENT_NICK}，您在『${SITE_NAME}』上的评论收到了回复';
-    let _template = ["<div",
+    let _template = process.env.MAIL_TEMPLATE || ["<div",
         " style=\"background: white; width: 100%; max-width: 800px; margin: auto auto; border-radius: 5px; border:#1bc3fb 1px solid; overflow: hidden; -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.12); box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.18);\">",
         " <header style=\"overflow: hidden;\">",
         "  <center><img style=\"width:100%;HEz-index: 666;\" src=\"https://cdn.jsdelivr.net/gh/HimitZH/CDN/images/HCODE.png\">",
