@@ -24,6 +24,6 @@
     "nodemon": "^1.11.0"
   },
   "engines": {
-    "node": "13.x"
+    "node": "6.x"
   }
 }
